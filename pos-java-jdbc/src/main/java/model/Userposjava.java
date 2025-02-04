@@ -27,6 +27,9 @@ public class Userposjava {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+		return "[Id=" + id + ", Nome=" + nome + ", Email=" + email + "]";
+	}
 	
-
 }

@@ -1,5 +1,7 @@
 package testeconexaojdbc;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import dao.UserPosDAO;
@@ -23,4 +25,37 @@ public class TesteConexaoBancoJdbc {
 		userPosDAO.salvar(userposjava);
 	}
 	
+	@Test
+	public void initListar() {
+		
+		UserPosDAO userPosDAO = new UserPosDAO();
+		
+		try {
+			List<Userposjava> list = userPosDAO.listar();
+			
+			for (Userposjava userposjava : list) {
+				System.out.println(userposjava);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
+	@Test
+	public void initBuscarId() {
+		
+		UserPosDAO userPosDAO = new UserPosDAO();
+		
+		try {
+			Userposjava userposjava = userPosDAO.buscarId(6L);
+			System.out.println(userposjava);	
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
 }
