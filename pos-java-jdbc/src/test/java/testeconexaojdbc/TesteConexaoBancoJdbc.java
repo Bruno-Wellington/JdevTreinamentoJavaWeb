@@ -9,6 +9,7 @@ import model.Userposjava;
 
 public class TesteConexaoBancoJdbc {
 
+	//CREATED
 	@Test
 	public void initBanco() {
 		//SingleConnection.getConnection();
@@ -18,13 +19,13 @@ public class TesteConexaoBancoJdbc {
 		//Model
 		Userposjava userposjava = new Userposjava();
 		
-		userposjava.setId(6L);
-		userposjava.setNome("paulo");
-		userposjava.setEmail("paulo@gmail.com");
+		userposjava.setNome("lucas");
+		userposjava.setEmail("lucas@gmail.com");
 		
 		userPosDAO.salvar(userposjava);
 	}
 	
+	//Read por lista
 	@Test
 	public void initListar() {
 		
@@ -44,6 +45,7 @@ public class TesteConexaoBancoJdbc {
 		}
 	}
 	
+	//Read por id
 	@Test
 	public void initBuscarId() {
 		
@@ -59,6 +61,7 @@ public class TesteConexaoBancoJdbc {
 		}
 	}
 	
+	//UPDATE
 	@Test
 	public void initAtualizar() {	
 		try {
