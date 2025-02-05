@@ -79,4 +79,17 @@ public class TesteConexaoBancoJdbc {
 		}
 		
 	}
+	
+	//DELETE
+	@Test
+	public void initDeletar() {
+		try {			
+			UserPosDAO userPosDAO = new UserPosDAO();
+			userPosDAO.deletar(5L);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
 }

@@ -127,4 +127,29 @@ public class UserPosDAO {
 		
 	}
 	
+	//Metodo para deletar um usuario
+	public void deletar (Long id) {		
+		try {
+			//Codigo sql.
+			String sql = "DELETE FROM userposjava WHERE id= " + id;
+			
+			//Preparando o sql.
+			PreparedStatement delete = connection.prepareStatement(sql);
+			delete.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			try {
+				//rollback() se der algum erro reverte a operação no banco de dados.
+				connection.rollback();
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				
+			}
+			e.printStackTrace();
+			
+		}
+	}
+	
 }
