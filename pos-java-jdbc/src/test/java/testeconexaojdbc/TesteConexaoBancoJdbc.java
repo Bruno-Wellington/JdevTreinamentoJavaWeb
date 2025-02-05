@@ -58,4 +58,22 @@ public class TesteConexaoBancoJdbc {
 			
 		}
 	}
+	
+	@Test
+	public void initAtualizar() {	
+		try {
+			//DAO
+			UserPosDAO userPosDAO = new UserPosDAO();
+			//Model
+			Userposjava userposjava = userPosDAO.buscarId(5L);
+			
+			userposjava.setNome("alterado com metodo Atualizar");
+			userPosDAO.atualizar(userposjava);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
 }

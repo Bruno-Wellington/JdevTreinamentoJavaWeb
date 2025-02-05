@@ -98,4 +98,34 @@ public class UserPosDAO {
 		return userposjava;
 	}
 	
+	//Metodo para atualizar um usuario
+	public void atualizar(Userposjava userposjava) {
+		
+		try {
+			//Codigo sql, a ? significa que vamos passar esse infromação por parametro.
+			String sql = "UPDATE userposjava SET nome= ? WHERE id= " + userposjava.getId();
+			
+			//Preparando o sql.
+			PreparedStatement update = connection.prepareStatement(sql);
+			
+			//No update primeiro informamos a posição e depois o valor do campo, a posição é refetente a sequencia no update into acima.
+			update.setString(1, userposjava.getNome());
+			update.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			try {
+				//rollback() se der algum erro reverte a operação no banco de dados.
+				connection.rollback();
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				
+			}
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
 }
