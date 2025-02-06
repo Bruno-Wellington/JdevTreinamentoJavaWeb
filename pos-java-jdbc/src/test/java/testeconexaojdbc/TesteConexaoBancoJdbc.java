@@ -100,7 +100,7 @@ public class TesteConexaoBancoJdbc {
 		Telefone telefone = new Telefone();
 		telefone.setNumero("(83) 99865-1738");
 		telefone.setTipo("Casa");
-		telefone.setUsusuariopessoa(9L);
+		telefone.setUsuariopessoa(9L);
 		
 		UserPosDAO userPosDAO = new UserPosDAO();
 		userPosDAO.salvarTelefone(telefone);

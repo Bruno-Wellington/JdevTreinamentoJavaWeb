@@ -60,7 +60,7 @@ public class UserPosDAO {
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, telefone.getNumero());
 			insert.setString(2, telefone.getTipo());
-			insert.setLong(3, telefone.getUsusuariopessoa());
+			insert.setLong(3, telefone.getUsuariopessoa());
 			insert.execute();
 			connection.commit();
 			
@@ -75,6 +75,7 @@ public class UserPosDAO {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	//Metodo que retorna uma lista de usuarios
 	public List<Userposjava> listar () throws Exception{
@@ -120,6 +121,7 @@ public class UserPosDAO {
 		
 		return userposjava;
 	}
+	
 	
 	//Metodo para atualizar um usuario
 	public void atualizar(Userposjava userposjava) {
