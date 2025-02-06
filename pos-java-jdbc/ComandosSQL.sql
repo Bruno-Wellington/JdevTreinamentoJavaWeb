@@ -63,3 +63,32 @@ ALTER TABLE telefonesequence
 /*Alterando a tabela telefoneuser para inserir o telefonesequence (Auto increment)*/
 ALTER TABLE telefoneuser ALTER COLUMN id SET DEFAULT NEXTVAL('telefonesequence'::regclass);
 
+/*Limpando a tabela userposjava para inserir insets junto a tabela telefoneuser*/
+
+DELETE FROM userposjava
+
+INSERT INTO public.userposjava(nome, email)
+	VALUES ('Bruno Wellington', 'bruno@gmail.com');
+	
+INSERT INTO public.userposjava(nome, email)
+	VALUES ('João Maria', 'joaomaria@gmail.com');
+
+select * from userposjava;
+
+
+INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa)
+	VALUES ('(45) 9 9979-5800', 'celular', 9);
+	
+INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa)
+	VALUES ('(45) 9 8821-2355', 'celular', 9);
+	
+INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa)
+	VALUES ('(45) 9 7845-8454', 'celular', 10);
+
+INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa)
+	VALUES ('(45) 9 7857-8754', 'celular', 10);
+
+INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa)
+	VALUES ('(45) 9 8658-6751', 'celular', 10);
+
+select * from telefoneuser;
