@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -20,6 +21,7 @@ public class UserPosDAO {
 		connection = SingleConnection.getConnection();
 		
 	}
+	
 	
 	//Metodo para salvar um novo usuario
 	public void salvar(Userposjava userposjava) {
@@ -53,6 +55,7 @@ public class UserPosDAO {
 		}		
 	}
 	
+	
 	//Metodo para salvar um telefone
 	public void salvarTelefone (Telefone telefone) {
 		try {
@@ -74,6 +77,35 @@ public class UserPosDAO {
 			}
 			e.printStackTrace();
 		}
+	}
+	
+	
+	//Metodo com inner join para consultar os telefones de um usuario
+	public List<BeanUserFone> listaUserFone (Long idUser) {
+		List<BeanUserFone> beanUserFones = new ArrayList<BeanUserFone>();
+		
+		String sql = "SELECT u.nome, t.numero, u.email FROM userposjava u INNER JOIN telefoneuser t ON u.id = t.usuariopessoa WHERE u.id= " + idUser;
+		
+		
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultado = statement.executeQuery();
+			
+			while(resultado.next()) {
+				BeanUserFone beanUserFone = new BeanUserFone();
+				beanUserFone.setNome(resultado.getString("nome"));
+				beanUserFone.setNumero(resultado.getString("numero"));
+				beanUserFone.setEmail(resultado.getString("email"));
+				
+				beanUserFones.add(beanUserFone);	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		
+		return beanUserFones;
 	}
 	
 	
@@ -101,6 +133,7 @@ public class UserPosDAO {
 		
 		return list;
 	}
+	
 	
 	//Metodo que retorna um usuario por id
 	public Userposjava buscarId(Long id) throws Exception {
@@ -152,6 +185,7 @@ public class UserPosDAO {
 		}
 		
 	}
+	
 	
 	//Metodo para deletar um usuario
 	public void deletar (Long id) {		

@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import dao.UserPosDAO;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -94,7 +95,9 @@ public class TesteConexaoBancoJdbc {
 		}
 	}
 	
-	//INSERT
+	
+	
+	//INSERT de telefone
 	@Test
 	public void initTesteInsertTelefone() {
 		Telefone telefone = new Telefone();
@@ -104,5 +107,21 @@ public class TesteConexaoBancoJdbc {
 		
 		UserPosDAO userPosDAO = new UserPosDAO();
 		userPosDAO.salvarTelefone(telefone);
+	}
+	
+	
+	//Read de telefone com Inner Join
+	@Test
+	public void initConsultaUserFone() {
+		UserPosDAO userPosDAO = new UserPosDAO();
+		
+		List<BeanUserFone> beanUserFones = userPosDAO.listaUserFone(10L);
+		
+		for (BeanUserFone beanUserFone : beanUserFones) {
+			System.out.println(beanUserFone);
+			System.out.println();
+			
+		}
+		
 	}
 }
