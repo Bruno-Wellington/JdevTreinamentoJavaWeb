@@ -124,4 +124,16 @@ public class TesteConexaoBancoJdbc {
 		}
 		
 	}
+	
+	//DELETE usuario e seus telefones
+	@Test
+	public void initDeleteUserFone() {
+		try {
+			UserPosDAO userPosDAO = new UserPosDAO();
+			userPosDAO.deletarUserFone(10L);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

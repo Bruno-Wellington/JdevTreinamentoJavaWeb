@@ -212,4 +212,32 @@ public class UserPosDAO {
 		}
 	}
 	
+	//Metodo para deletar um usuario e seus telefones
+	public void deletarUserFone(Long id) {
+		try{
+			String sqlTel = "DELETE FROM telefoneuser t WHERE t.usuariopessoa= " + id;
+			String sqlUser = "DELETE FROM userposjava u WHERE u.id= " + id;
+			
+			PreparedStatement delete = connection.prepareStatement(sqlTel);
+			delete.execute();
+			connection.commit();
+			
+			delete = connection.prepareStatement(sqlUser);
+			delete.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			
+			try {
+				connection.rollback();
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				
+			}
+			e.printStackTrace();
+			
+		}	
+	}
+	
 }
