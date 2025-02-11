@@ -39,15 +39,38 @@ public class ServletLogin extends HttpServlet {
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
 			
+			//Validando se usuario e senha estao cadastrados
+			if(modelLogin.getLogin().equalsIgnoreCase("admin") 
+					&& modelLogin.getSenha().equalsIgnoreCase("admin")) {
+				
+				//Mantendo o usuario logado na sessão
+				request.getSession().setAttribute("usuario", modelLogin.getLogin());
+				//Pagina para onde o usuario será Redirecionado
+				RequestDispatcher redirecionar = request.getRequestDispatcher("principal/principal.jsp");
+				//Comando de redirecionamento
+				redirecionar.forward(request, response);
+				
+			}else {
+				//Pagina para onde o usuario será Redirecionado caso nao passe na validação 
+				RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
+				//Passando mensagem ao usuario caso nao passe na validação 
+				request.setAttribute("msg", "Informe o login e senha corretamente!");
+				//Comando de redirecionamento
+				redirecionar.forward(request, response);
+				
+			}
+			
 		}else {
-			//Redirecionando o usuario para o index caso nao passe na validação 
+			//Pagina para onde o usuario será Redirecionado caso nao passe na validação 
 			RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
 			//Passando mensagem ao usuario caso nao passe na validação 
 			request.setAttribute("msg", "Informe o login e senha corretamente!");
 			//Comando de redirecionamento
 			redirecionar.forward(request, response);
+			
 		}
 			
 	}
 
 }
+
