@@ -10,7 +10,7 @@ import model.ModelLogin;
 
 import java.io.IOException;
 
-@WebServlet("/ServletLogin") //Mapeamento de URL que vem da tela
+@WebServlet(urlPatterns = {"/principal/ServletLogin", "/ServletLogin"}) //Mapeamento de URL que vem da tela
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,6 +30,7 @@ public class ServletLogin extends HttpServlet {
 		//Recebendo os dados de login e senha vindos do front e armazenando em variaveis
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		String url = request.getParameter("url");
 		
 		//Validando se os dados de login e senha foram informados
 		if(login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
@@ -43,16 +44,22 @@ public class ServletLogin extends HttpServlet {
 			if(modelLogin.getLogin().equalsIgnoreCase("admin") 
 					&& modelLogin.getSenha().equalsIgnoreCase("admin")) {
 				
+				//Validando a url
+				if (url == null || url.equalsIgnoreCase("null")) {
+					url = "principal/principal.jsp";
+					
+				}
+				
 				//Mantendo o usuario logado na sessão
 				request.getSession().setAttribute("usuario", modelLogin.getLogin());
 				//Pagina para onde o usuario será Redirecionado
-				RequestDispatcher redirecionar = request.getRequestDispatcher("principal/principal.jsp");
+				RequestDispatcher redirecionar = request.getRequestDispatcher(url);
 				//Comando de redirecionamento
 				redirecionar.forward(request, response);
 				
 			}else {
 				//Pagina para onde o usuario será Redirecionado caso nao passe na validação 
-				RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
+				RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp");
 				//Passando mensagem ao usuario caso nao passe na validação 
 				request.setAttribute("msg", "Informe o login e senha corretamente!");
 				//Comando de redirecionamento

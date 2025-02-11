@@ -9,7 +9,9 @@
 <body>
 	<h2>Bem Vindo ao Curso de JSP</h2>
 	
-	<form action="ServletLogin" method="post">	
+	<form action="ServletLogin" method="post">
+	<!-- O tipo hidden oculta a informação -->
+	<input type="hidden" value="<%= request.getParameter("url") %>" name="url">	
 		<table>
 			<tr>
 				<td><label>Login</label></td>
