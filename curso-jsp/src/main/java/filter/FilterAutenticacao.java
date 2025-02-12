@@ -70,6 +70,11 @@ public class FilterAutenticacao extends HttpFilter implements Filter {
 		}catch (Exception e) {
 			e.printStackTrace();
 			
+			//Redireciona o usuario para a pagina de erro 
+			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
+			request.setAttribute("msg", e.getMessage());
+			redirecionar.forward(request, response);
+			
 			try {
 				connection.rollback();
 				
