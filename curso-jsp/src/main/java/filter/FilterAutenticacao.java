@@ -31,6 +31,7 @@ public class FilterAutenticacao extends HttpFilter implements Filter {
 	//Tudo que for feito no sistema vai passar por ele, ex: validação de autenticação, commits e rolbacks de transações, validar e fazer redirecionamentos de paginas, etc...
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
+		//Convertendo o request ServletRequest em req HttpServletRequest
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
@@ -42,7 +43,7 @@ public class FilterAutenticacao extends HttpFilter implements Filter {
 		if(usuarioLogado == null && 
 				!urlParaAutenticar.equalsIgnoreCase("/principal/ServletLogin")) {//Usuario nao está logado
 			
-			RequestDispatcher redireciona= request.getRequestDispatcher("/index.jsp?url=" + urlParaAutenticar);
+			RequestDispatcher redireciona = request.getRequestDispatcher("/index.jsp?url=" + urlParaAutenticar);
 			request.setAttribute("msg", "Por favor realize o login!");
 			redireciona.forward(request, response);
 			return; //Para a execução e redireciona para o login

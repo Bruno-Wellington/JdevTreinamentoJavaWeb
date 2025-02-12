@@ -44,14 +44,15 @@ public class ServletLogin extends HttpServlet {
 			if(modelLogin.getLogin().equalsIgnoreCase("admin") 
 					&& modelLogin.getSenha().equalsIgnoreCase("admin")) {
 				
+				//Mantendo o usuario logado na sessão
+				request.getSession().setAttribute("usuario", modelLogin.getLogin());
+
 				//Validando a url
 				if (url == null || url.equalsIgnoreCase("null")) {
 					url = "principal/principal.jsp";
 					
 				}
 				
-				//Mantendo o usuario logado na sessão
-				request.getSession().setAttribute("usuario", modelLogin.getLogin());
 				//Pagina para onde o usuario será Redirecionado
 				RequestDispatcher redirecionar = request.getRequestDispatcher(url);
 				//Comando de redirecionamento
