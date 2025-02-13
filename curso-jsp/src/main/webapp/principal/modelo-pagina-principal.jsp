@@ -38,7 +38,7 @@
 									<div class="page-body">
 										<div class="row">
 
-											<h1>Conteudo do projeto</h1>
+											<h1>Este é um modelo para criação de paginas</h1>
 
 										</div>
 									</div>
