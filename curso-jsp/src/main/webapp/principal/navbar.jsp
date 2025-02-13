@@ -116,8 +116,9 @@
 							href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock
 								Screen
 						</a></li>
+						<!-- Ação de logout feita no ServletLogin do back-end -->
 						<li class="waves-effect waves-light"><a
-							href="auth-normal-sign-in.html"> <i
+							href="ServletLogin?acao=logout"> <i
 								class="ti-layout-sidebar-left"></i> Logout
 						</a></li>
 					</ul></li>
