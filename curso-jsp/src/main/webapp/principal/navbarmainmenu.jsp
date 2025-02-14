@@ -8,7 +8,7 @@
 	<div class="pcoded-inner-navbar main-menu">
 		<div class="">
 			<div class="main-menu-header">
-				<img class="img-80 img-radius" src="assets/images/avatar-4.jpg"
+				<img class="img-80 img-radius" src="<%= request.getContextPath() %>/assets/images/avatar-4.jpg"
 					alt="User-Profile-Image">
 				<div class="user-details">
 					<!-- Capturando do back-end o usuario logado, o sinal de = é para que seja impresso a informação na tela -->
@@ -41,7 +41,9 @@
 		<div class="pcoded-navigation-label"
 			data-i18n="nav.category.navigation">Layout</div>
 		<ul class="pcoded-item pcoded-left-item">
-			<li class="active"><a href="index.html"
+		
+			<!-- Redirecionando para a pagina de cadastro de usuarios -->
+			<li class="active"><a href="principal.jsp"
 				class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 						class="ti-home"></i><b>D</b></span> <span class="pcoded-mtext"
 					data-i18n="nav.dash.main">Dashboard</span> <span
@@ -54,10 +56,12 @@
 					class="pcoded-mcaret"></span>
 			</a>
 				<ul class="pcoded-submenu">
-					<li class=" "><a href="accordion.html"
+				
+					<!-- Redirecionando para a pagina de cadastro de usuarios -->
+					<li class=" "><a href="principal/cadastro-usuario.jsp"
 						class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 								class="ti-angle-right"></i></span> <span class="pcoded-mtext"
-							data-i18n="nav.basic-components.alert">Accordion</span> <span
+							data-i18n="nav.basic-components.alert">Usuário</span> <span
 							class="pcoded-mcaret"></span>
 					</a></li>
 					<li class=" "><a href="breadcrumb.html"
