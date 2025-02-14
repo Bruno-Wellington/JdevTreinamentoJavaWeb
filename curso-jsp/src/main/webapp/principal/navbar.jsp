@@ -62,7 +62,10 @@
 									src="assets/images/avatar-2.jpg"
 									alt="Generic placeholder image">
 								<div class="media-body">
-									<h5 class="notification-user">John Doe</h5>
+								
+								<!-- Capturando do back-end o usuario logado, o sinal de = é para que seja impresso a informação na tela -->
+								<!-- Primeira forma de capturar essa informação -->
+									<h5 class="notification-user"><%= request.getSession().getAttribute("usuario") %></h5>
 									<p class="notification-msg">Lorem ipsum dolor sit amet,
 										consectetuer elit.</p>
 									<span class="notification-time">30 minutes ago</span>
@@ -99,7 +102,10 @@
 				<li class="user-profile header-notification"><a href="#!"
 					class="waves-effect waves-light"> <img
 						src="assets/images/avatar-4.jpg" class="img-radius"
-						alt="User-Profile-Image"> <span>John Doe</span> <i
+						alt="User-Profile-Image"> 
+						<!-- Capturando do back-end o usuario logado, o sinal de = é para que seja impresso a informação na tela -->
+						<!-- Segunda forma de capturar essa informação -->
+						<span><%= session.getAttribute("usuario") %></span> <i
 						class="ti-angle-down"></i>
 				</a>
 					<ul class="show-notification profile-notification">
