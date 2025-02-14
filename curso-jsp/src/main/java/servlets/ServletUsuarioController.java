@@ -46,7 +46,14 @@ public class ServletUsuarioController extends HttpServlet {
 		
 		//Redirecionando apos salvar novo usuario
 		RequestDispatcher redireciona = request.getRequestDispatcher("principal/cadastro-usuario.jsp");
+		//Atributo para mostrar os dados na tela apos salvar
+		request.setAttribute("modelLogin", modelLogin);
 		redireciona.forward(request, response);
+		
+		//podemos encurtar o codigo assim
+		/* request.setAttribute("modelLogin", modelLogin);
+		 * request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
+		 */
 	}
 
 }

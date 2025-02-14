@@ -48,27 +48,32 @@
 														<!-- Chama no back end a Servelt de Usuario controller -->
 														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post">
 															<div class="form-group form-default">
-																<input type="text" name="id" id="id" class="form-control" disabled> 
+																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
+																<input type="text" name="id" id="id" class="form-control" disabled value="${modelLogin.id}"> 
 																<span class="form-bar"></span> 
 																<label class="float-label">ID</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="text" name="nome" id="nome" class="form-control" required="required" autocomplete="off">
+																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
+																<input type="text" name="nome" id="nome" class="form-control" required="required" autocomplete="off" value="${modelLogin.nome}">
 																<span class="form-bar"></span>
 																<label class="float-label">Nome</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="email" name="email" id="email" class="form-control" required="required" autocomplete="off">
+																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
+																<input type="email" name="email" id="email" class="form-control" required="required" autocomplete="off" value="${modelLogin.email}">
 																<span class="form-bar"></span>
 																<label class="float-label">E-mail (exemplo@gmail.com)</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off">
+																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
+																<input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${modelLogin.login}">
 																<span class="form-bar"></span>
 																<label class="float-label">Login</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="password" name="senha" id="senha" class="form-control" required="required" autocomplete="off">
+																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
+																<input type="password" name="senha" id="senha" class="form-control" required="required" autocomplete="off" value="${modelLogin.senha}">
 																<span class="form-bar"></span>
 																<label class="float-label">Senha</label>
 															</div>
