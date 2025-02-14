@@ -32,6 +32,7 @@
 	
 	<h1>Bem Vindo ao Curso de JSP</h1>
 	
+	<!-- Chama no back end a Servelt de login -->
 	<form action="<%= request.getContextPath() %>/ServletLogin" method="post" class="row g-3 needs-validation" novalidate>
 	
 		<!-- O tipo hidden oculta a informação -->

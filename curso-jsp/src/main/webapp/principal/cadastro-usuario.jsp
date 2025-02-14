@@ -41,47 +41,42 @@
 												<!-- Basic Form Inputs card start -->
 												<div class="card">
 													<div class="card-header">
-														<h3>Cadastro de usuario</h3>
+														<h3>Cadastro de Usuário</h3>
 													</div>
 
 													<div class="card-block">
-														<form class="form-material">
+														<!-- Chama no back end a Servelt de Usuario controller -->
+														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post">
 															<div class="form-group form-default">
-																<input type="text" name="footer-email"
-																	class="form-control" required="" disabled> <span
-																	class="form-bar"></span> <label class="float-label">ID</label>
+																<input type="text" name="id" id="id" class="form-control" disabled> 
+																<span class="form-bar"></span> 
+																<label class="float-label">ID</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="text" name="footer-email"
-																	class="form-control" required=""> <span
-																	class="form-bar"></span> <label class="float-label">Nome</label>
+																<input type="text" name="nome" id="nome" class="form-control" required="required" autocomplete="off">
+																<span class="form-bar"></span>
+																<label class="float-label">Nome</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="password" name="footer-email"
-																	class="form-control" required=""> <span
-																	class="form-bar"></span> <label class="float-label">Password</label>
+																<input type="email" name="email" id="email" class="form-control" required="required" autocomplete="off">
+																<span class="form-bar"></span>
+																<label class="float-label">E-mail (exemplo@gmail.com)</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="text" name="footer-email"
-																	class="form-control" required=""> <span
-																	class="form-bar"></span> <label class="float-label">E-mail
-																	(exemplo@gmail.com)</label>
+																<input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off">
+																<span class="form-bar"></span>
+																<label class="float-label">Login</label>
 															</div>
-															<button class="btn btn-primary waves-effect waves-light">Primary
-																Button</button>
-															<button class="btn btn-success waves-effect waves-light">Success
-																Button</button>
-															<button class="btn btn-info waves-effect waves-light">Info
-																Button</button>
-															<button class="btn btn-warning waves-effect waves-light">Warning
-																Button</button>
-															<button class="btn btn-danger waves-effect waves-light">Danger
-																Button</button>
-															<button class="btn btn-inverse waves-effect waves-light">Inverse
-																Button</button>
-															<button
-																class="btn btn-disabled disabled waves-effect waves-light">Disabled
-																Button</button>
+															<div class="form-group form-default">
+																<input type="password" name="senha" id="senha" class="form-control" required="required" autocomplete="off">
+																<span class="form-bar"></span>
+																<label class="float-label">Senha</label>
+															</div>
+															
+															<button class="btn waves-effect waves-light hor-grd btn-grd-primary ">Novo</button>
+															<button class="btn waves-effect waves-light hor-grd btn-grd-success">Salvar</button>
+															<button class="btn waves-effect waves-light hor-grd btn-grd-danger ">Excluir</button>
+									
 														</form>
 													</div>
 
