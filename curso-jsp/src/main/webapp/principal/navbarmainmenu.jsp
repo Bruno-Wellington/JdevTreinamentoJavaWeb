@@ -23,7 +23,7 @@
 					<li class="more-details"><a href="user-profile.html"><i
 							class="ti-user"></i>View Profile</a> <a href="#!"><i
 							class="ti-settings"></i>Settings</a> <a
-						href="ServletLogin?acao=logout"><i
+						href="<%= request.getContextPath() %>/ServletLogin?acao=logout"><i
 							class="ti-layout-sidebar-left"></i>Logout</a></li>
 				</ul>
 			</div>
@@ -43,7 +43,7 @@
 		<ul class="pcoded-item pcoded-left-item">
 		
 			<!-- Redirecionando para a pagina de cadastro de usuarios -->
-			<li class="active"><a href="principal.jsp"
+			<li class="active"><a href="<%= request.getContextPath() %>/principal/principal.jsp"
 				class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 						class="ti-home"></i><b>D</b></span> <span class="pcoded-mtext"
 					data-i18n="nav.dash.main">Dashboard</span> <span
@@ -58,7 +58,7 @@
 				<ul class="pcoded-submenu">
 				
 					<!-- Redirecionando para a pagina de cadastro de usuarios -->
-					<li class=" "><a href="principal/cadastro-usuario.jsp"
+					<li class=" "><a href="<%= request.getContextPath() %>/principal/cadastro-usuario.jsp"
 						class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 								class="ti-angle-right"></i></span> <span class="pcoded-mtext"
 							data-i18n="nav.basic-components.alert">Usuário</span> <span

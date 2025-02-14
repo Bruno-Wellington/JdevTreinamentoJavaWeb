@@ -124,7 +124,7 @@
 						</a></li>
 						<!-- Ação de logout feita no ServletLogin do back-end -->
 						<li class="waves-effect waves-light"><a
-							href="ServletLogin?acao=logout"> <i
+							href="<%= request.getContextPath() %>/ServletLogin?acao=logout"> <i
 								class="ti-layout-sidebar-left"></i> Logout
 						</a></li>
 					</ul></li>
