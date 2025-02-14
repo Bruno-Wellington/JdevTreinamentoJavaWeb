@@ -83,8 +83,10 @@
 															<button class="btn waves-effect waves-light hor-grd btn-grd-danger ">Excluir</button>
 									
 														</form>
+														<br>
+														<span>${msg}</span>
 													</div>
-
+													
 												</div>
 											</div>
 										</div>
@@ -97,6 +99,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		<!-- Incluindo o javascriptfile que separamos para reaproveitar em outras paginas -->
 		<jsp:include page="javascriptfile.jsp"></jsp:include>
