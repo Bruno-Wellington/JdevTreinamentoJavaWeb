@@ -46,7 +46,7 @@
 
 													<div class="card-block">
 														<!-- Chama no back end a Servelt de Usuario controller -->
-														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post">
+														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post" id="formUser">
 															<div class="form-group form-default">
 																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
 																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modelLogin.id}"> 
@@ -78,7 +78,7 @@
 																<label class="float-label">Senha</label>
 															</div>
 															
-															<button class="btn waves-effect waves-light hor-grd btn-grd-primary ">Novo</button>
+															<button class="btn waves-effect waves-light hor-grd btn-grd-primary" onclick="limparForm()">Novo</button>
 															<button class="btn waves-effect waves-light hor-grd btn-grd-success">Salvar</button>
 															<button class="btn waves-effect waves-light hor-grd btn-grd-danger ">Excluir</button>
 									
@@ -103,6 +103,17 @@
 		</div>
 		<!-- Incluindo o javascriptfile que separamos para reaproveitar em outras paginas -->
 		<jsp:include page="javascriptfile.jsp"></jsp:include>
+		
+		<script type="text/javascript">
+			function limparForm() {
+				/*Retorna os elementos html dentro do form*/
+				var elementos = document.getElementById("formUser").elements;
+				
+				for(p = 0; p < elementos.length; p++){
+					elementos[p].value = '';
+				}
+			}
+		</script>
 </body>
 
 </html>
