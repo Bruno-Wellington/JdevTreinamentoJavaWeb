@@ -56,8 +56,18 @@ public class ServletUsuarioController extends HttpServlet {
 				msg = "Já existe usuário cadastrado com esse login, informe outro login!";
 				
 			} else {
+				if(modelLogin.isNovo()) {
+					msg = "Gravado com sucesso!";
+					
+				}else {
+					msg = "Atualizado com sucesso!";
+					
+				}
+				
 				modelLogin = daoUsuarioRepository.salvarUsuario(modelLogin);
+				
 			}
+			
 			request.setAttribute("msg", msg);
 			//Redirecionando apos salvar novo usuario
 			RequestDispatcher redireciona = request.getRequestDispatcher("principal/cadastro-usuario.jsp");

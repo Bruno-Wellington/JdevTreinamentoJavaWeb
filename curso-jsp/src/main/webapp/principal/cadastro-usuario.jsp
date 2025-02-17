@@ -49,7 +49,7 @@
 														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post">
 															<div class="form-group form-default">
 																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
-																<input type="text" name="id" id="id" class="form-control" disabled value="${modelLogin.id}"> 
+																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modelLogin.id}"> 
 																<span class="form-bar"></span> 
 																<label class="float-label">ID</label>
 															</div>
