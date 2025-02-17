@@ -33,6 +33,9 @@ public class ServletUsuarioController extends HttpServlet {
 		
 		
 		try {
+			
+			String msg = "Operação realizada com sucesso!";
+			
 			//Capturando as informações vindas do front end por parametro
 			String id = request.getParameter("id");
 			String nome = request.getParameter("nome");
@@ -49,9 +52,13 @@ public class ServletUsuarioController extends HttpServlet {
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
 			
-			modelLogin = daoUsuarioRepository.salvarUsuario(modelLogin);
-			request.setAttribute("msg", "Operação realizada com sucesso!");
-			
+			if(daoUsuarioRepository.validarLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
+				msg = "Já existe usuário cadastrado com esse login, informe outro login!";
+				
+			} else {
+				modelLogin = daoUsuarioRepository.salvarUsuario(modelLogin);
+			}
+			request.setAttribute("msg", msg);
 			//Redirecionando apos salvar novo usuario
 			RequestDispatcher redireciona = request.getRequestDispatcher("principal/cadastro-usuario.jsp");
 			//Atributo para mostrar os dados na tela apos salvar

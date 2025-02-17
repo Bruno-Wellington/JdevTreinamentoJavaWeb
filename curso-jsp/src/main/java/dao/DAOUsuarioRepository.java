@@ -29,11 +29,11 @@ public class DAOUsuarioRepository {
 		connection.commit();
 		
 		//Apos gravar o usuario, será disparado esse metodo de consulta.
-		return this.consultaUsuario(modelLogin.getLogin());
+		return this.consultarUsuario(modelLogin.getLogin());
 		
 	}
 	
-	public ModelLogin consultaUsuario(String login) throws Exception {
+	public ModelLogin consultarUsuario(String login) throws Exception {
 		
 		ModelLogin modelLogin = new ModelLogin();
 		
@@ -53,5 +53,20 @@ public class DAOUsuarioRepository {
 		}
 		
 		return modelLogin;
+	}
+	
+	public boolean validarLogin(String login) throws Exception {
+		
+		String sql = "SELECT COUNT(1) > 0 AS existe FROM model_login WHERE UPPER(login) = UPPER(?)";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, login);
+		ResultSet resultado = statement.executeQuery();
+		
+		if(resultado.next()) {
+			return resultado.getBoolean("existe");
+		}
+		
+		return false;
+	
 	}
 }
