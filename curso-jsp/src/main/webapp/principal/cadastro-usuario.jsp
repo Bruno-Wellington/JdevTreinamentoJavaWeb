@@ -47,7 +47,7 @@
 													<div class="card-block">
 														<!-- Chama no back end a Servelt de Usuario controller -->
 														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post" id="formUser">
-															<div class="form-group form-default">
+															<div class="form-group form-default form-static-label">
 																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
 																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modelLogin.id}"> 
 																<span class="form-bar"></span> 
