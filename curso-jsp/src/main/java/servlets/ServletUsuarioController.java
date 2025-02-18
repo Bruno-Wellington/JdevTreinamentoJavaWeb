@@ -28,9 +28,11 @@ public class ServletUsuarioController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			
 			String acao = request.getParameter("acao");
 			
 			if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("deletar")) {
+				
 				String idUser = request.getParameter("id");
 				daoUsuarioRepository.deletarUser(idUser);
 				request.setAttribute("msg", "Excluido com sucesso!");
@@ -39,11 +41,19 @@ public class ServletUsuarioController extends HttpServlet {
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 						
 			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("deletarajax")) {
+				
 				String idUser = request.getParameter("id");
 				daoUsuarioRepository.deletarUser(idUser);
 				response.getWriter().write("Excluido com sucesso!");
 				
+			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarUserAjax")) {
+				
+				String nomeBusca = request.getParameter("nomeBusca");
+				//daoUsuarioRepository.deletarUser(nomeBusca);
+				//response.getWriter().write("Excluido com sucesso!");
+				
 			} else {
+				
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 				
 			}
