@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import connection.SingleConnectionBanco;
 import model.ModelLogin;
@@ -67,6 +69,32 @@ public class DAOUsuarioRepository {
 		}
 		
 		return modelLogin;
+	}
+	
+	/*Retorna uma lista de usuarios*/
+	public List<ModelLogin> consultaUsuarioList(String nome) throws Exception {
+		
+		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
+		
+		String sql = "SELECT * FROM model_login WHERE UPPER(nome) LIKE UPPER(?) ";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%" + nome + "%");
+		
+		ResultSet resultado = statement.executeQuery();
+		
+		while(resultado.next()) {
+			ModelLogin modelLogin = new ModelLogin();
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setLogin(resultado.getString("login"));
+			//modelLogin.setSenha(resultado.getString("senha"));
+			
+			listaUsuarios.add(modelLogin);
+		}
+		
+		return listaUsuarios;
+		
 	}
 	
 	public boolean validarLogin(String login) throws Exception {
