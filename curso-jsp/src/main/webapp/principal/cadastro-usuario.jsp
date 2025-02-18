@@ -125,9 +125,9 @@
     						<button class="btn waves-effect waves-light hor-grd btn-grd-success" type="button" onclick="buscarUsuario()">Buscar</button>
   						</div>
 					</div>
-					
-					<div>
-						<table class="table">
+					<!-- overflow: scroll - adiciona uma barra de rolagem dentro da div da tabela -->
+					<div style="height: 300px; overflow: scroll;">
+						<table class="table" id="tabelaresultados">
 	  						<thead>
 	  							<tr>
 	  								<th scope="col">Id</th>
@@ -137,14 +137,11 @@
 	  							</tr>
 	  						</thead>
 	  						<tbody>
-	  							<tr>
-	  								<th scope="row">1</th>
-	  								<td>Brunin</td>
-	  								<td></td>
-	  							</tr>
+	  							
 	  						</tbody>
 	  					</table>
 					</div>
+	  				<span id="totalResultados"></span>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-danger" data-dismiss="modal">Fechar</button>	
@@ -175,9 +172,17 @@
 					url : urlAction,
 					data : "nomeBusca=" + nomeBusca + '&acao=buscarUserAjax',
 					success : function(response) {
+						/*Convertendo a resposta em json*/
+						var json = JSON.parse(response);
 						
+						$('#tabelaresultados > tbody > tr').remove();
 						
-						alert(response);
+						for(var p = 0; p < json.length; p++){
+							$('#tabelaresultados > tbody').append('<tr><td>' + json[p].id + '</td><td>' + json[p].nome + '</td><td> <button class="btn waves-effect waves-light hor-grd btn-grd-primary">Ver</button> </td></tr>');
+							
+						}
+						
+						document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
 					}
 
 				}).fail(function(xhr, status, errorThrown) {
