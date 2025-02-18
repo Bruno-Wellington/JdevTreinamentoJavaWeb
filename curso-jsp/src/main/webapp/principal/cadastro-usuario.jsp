@@ -84,10 +84,11 @@
 															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-primary" onclick="limparForm()">Novo</button>
 															<button class="btn waves-effect waves-light hor-grd btn-grd-success">Salvar</button>
 															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-danger" onclick="criarDelete()">Excluir</button>
+															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-warning" onclick="criarDeleteComAjax()">Excluir com Ajax</button>
 									
 														</form>
 														<br>
-														<span>${msg}</span>
+														<span id="msg">${msg}</span>
 													</div>
 													
 												</div>
@@ -108,6 +109,33 @@
 		<jsp:include page="javascriptfile.jsp"></jsp:include>
 		
 		<script type="text/javascript">
+		
+			/*Tem que ter o Jquery no projeto para funcionar*/
+			function criarDeleteComAjax() {
+				
+				if(confirm('Deseja realmente excluir os dados?')){
+					
+					var urlAction = document.getElementById('formUser').action;
+					var idUser = document.getElementById('id').value;
+					
+					$.ajax({
+						
+						method: "get",
+						url: urlAction,
+						data: "id=" + idUser + '&acao=deletarajax',
+						success: function(response) {
+							
+							limparForm(); //Limpando o formulario apos a exclusão
+							document.getElementById('msg').textContent = response;
+						}
+						
+					}).fail(function(xhr, status, errorThrown) {
+						alert('Erro ao deletar usuário por id: ' + xhr.responseText);
+						
+					});
+					
+				}
+			}	
 		
 			function criarDelete() {
 				
