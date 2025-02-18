@@ -47,6 +47,9 @@
 													<div class="card-block">
 														<!-- Chama no back end a Servelt de Usuario controller -->
 														<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post" id="formUser">
+														
+															<input type="hidden" name="acao" id="acao" value="">
+														
 															<div class="form-group form-default form-static-label">
 																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
 																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modelLogin.id}"> 
@@ -78,9 +81,9 @@
 																<label class="float-label">Senha</label>
 															</div>
 															
-															<button class="btn waves-effect waves-light hor-grd btn-grd-primary" onclick="limparForm()">Novo</button>
+															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-primary" onclick="limparForm()">Novo</button>
 															<button class="btn waves-effect waves-light hor-grd btn-grd-success">Salvar</button>
-															<button class="btn waves-effect waves-light hor-grd btn-grd-danger ">Excluir</button>
+															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-danger" onclick="criarDelete()">Excluir</button>
 									
 														</form>
 														<br>
@@ -105,6 +108,13 @@
 		<jsp:include page="javascriptfile.jsp"></jsp:include>
 		
 		<script type="text/javascript">
+		
+			function criarDelete() {
+				document.getElementById("formUser").method = 'get';
+				document.getElementById("acao").value = 'deletar';
+				document.getElementById("formUser").submit();
+			}	
+		
 			function limparForm() {
 				/*Retorna os elementos html dentro do form*/
 				var elementos = document.getElementById("formUser").elements;
