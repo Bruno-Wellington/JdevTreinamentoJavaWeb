@@ -112,19 +112,42 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Usuários</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisar Usuários</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
+					<div class="input-group mb-3">
+  						<input type="text" class="form-control" id="nomeBusca" placeholder="Digite o nome do usuário" aria-label="nome" aria-describedby="basic-addon2">
+  						<div class="input-group-append">
+    						<button class="btn waves-effect waves-light hor-grd btn-grd-success" type="button" onclick="buscarUsuario()">Buscar</button>
+  						</div>
+					</div>
 					
-					
-				
+					<div>
+						<table class="table">
+	  						<thead>
+	  							<tr>
+	  								<th scope="col">Id</th>
+	  								<th scope="col">Nome</th>
+	  								<th scope="col">Ver</th>
+	
+	  							</tr>
+	  						</thead>
+	  						<tbody>
+	  							<tr>
+	  								<th scope="row">1</th>
+	  								<td>Brunin</td>
+	  								<td></td>
+	  							</tr>
+	  						</tbody>
+	  					</table>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>	
+					<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-danger" data-dismiss="modal">Fechar</button>	
 				</div>
 			</div>
 		</div>
@@ -133,7 +156,21 @@
 	<!-- Incluindo o javascriptfile que separamos para reaproveitar em outras paginas -->
 	<jsp:include page="javascriptfile.jsp"></jsp:include>
 
+	<!-- Funções JavaScript -->
 	<script type="text/javascript">
+	
+		/*Buscar usuario por nome*/
+		function buscarUsuario() {
+			
+			var nomeBusca = document.getElementById('nomeBusca').value;
+			
+			/*Validando. Tem que ter valor para buscar no banco*/
+			if(nomeBusca != null && nomeBusca != '' && nomeBusca.trim() != '') {
+				
+				alert(nomeBusca);
+			}
+		}
+	
 		/*Tem que ter o Jquery no projeto para funcionar*/
 		function criarDeleteComAjax() {
 
@@ -164,7 +201,7 @@
 		}
 
 		function criarDelete() {
-
+			
 			if (confirm('Deseja realmente excluir os dados')) {
 
 				document.getElementById("formUser").method = 'get';
