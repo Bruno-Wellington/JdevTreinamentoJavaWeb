@@ -18,6 +18,7 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	/*Metodo para salvar um novo usuario*/
 	public ModelLogin salvarUsuario(ModelLogin modelLogin) throws Exception {
 		
 		if(modelLogin.isNovo()) { //Verifica se é um novo usuario e grava se for true
@@ -49,6 +50,7 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	/*Metodo de consuta de usuario por nome*/
 	public ModelLogin consultarUsuario(String login) throws Exception {
 		
 		ModelLogin modelLogin = new ModelLogin();
@@ -57,6 +59,29 @@ public class DAOUsuarioRepository {
 		String sql = "SELECT * FROM model_login WHERE UPPER(login)= UPPER(?)";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setString(1, login);
+		ResultSet resultado = statement.executeQuery();
+		
+		//Enquando tiver resultado
+		while(resultado.next()) {
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setLogin(resultado.getString("login"));
+			modelLogin.setSenha(resultado.getString("senha"));
+		}
+		
+		return modelLogin;
+	}
+	
+	/*Metodo de consuta de usuario por ID*/
+	public ModelLogin consultarUsuarioId(String id) throws Exception {
+		
+		ModelLogin modelLogin = new ModelLogin();
+		
+		//Preparando sql
+		String sql = "SELECT * FROM model_login WHERE id= ?";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setLong(1, Long.parseLong(id));
 		ResultSet resultado = statement.executeQuery();
 		
 		//Enquando tiver resultado
@@ -97,6 +122,7 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	/*Metodo para validar login*/
 	public boolean validarLogin(String login) throws Exception {
 		
 		String sql = "SELECT COUNT(1) > 0 AS existe FROM model_login WHERE UPPER(login) = UPPER(?)";
@@ -112,6 +138,7 @@ public class DAOUsuarioRepository {
 	
 	}
 	
+	/*Metodo para deletar um usuario*/
 	public void deletarUser(String idUser) throws Exception {
 		
 		String sql = "DELETE FROM model_login WHERE id= ?";
