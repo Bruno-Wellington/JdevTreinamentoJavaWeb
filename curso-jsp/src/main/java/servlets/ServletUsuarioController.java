@@ -38,8 +38,12 @@ public class ServletUsuarioController extends HttpServlet {
 				
 				String idUser = request.getParameter("id");
 				daoUsuarioRepository.deletarUser(idUser);
-				request.setAttribute("msg", "Excluido com sucesso!");
 				
+				/*Carregando usuarios na tela com JSTL*/
+				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela();
+				request.setAttribute("modelLogins", modelLogins);
+				
+				request.setAttribute("msg", "Excluido com sucesso!");	
 				//Redirecionando apos excluir o usuario
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 						
@@ -67,12 +71,29 @@ public class ServletUsuarioController extends HttpServlet {
 				/*Consulta no banco de dados*/
 				ModelLogin modelLogin = daoUsuarioRepository.consultarUsuarioId(id);
 				
+				/*Carregando usuarios na tela com JSTL*/
+				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela();
+				request.setAttribute("modelLogins", modelLogins);
+				
 				request.setAttribute("msg", "Usuário em edição");
 				//Redirecionando
 				request.setAttribute("modelLogin", modelLogin);
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 				
+			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarUser")) {
+				
+				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela();
+				
+				request.setAttribute("msg", "Usuários carregados!");
+				/*Carregando usuarios na tela com JSTL*/
+				request.setAttribute("modelLogins", modelLogins);
+				request.getRequestDispatcher("/principal/cadastro-usuario.jsp").forward(request, response);
+				
 			} else {
+				
+				/*Carregando usuarios na tela com JSTL*/
+				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela();
+				request.setAttribute("modelLogins", modelLogins);
 				
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 				
@@ -125,6 +146,10 @@ public class ServletUsuarioController extends HttpServlet {
 				modelLogin = daoUsuarioRepository.salvarUsuario(modelLogin);
 				
 			}
+			
+			/*Carregando usuarios na tela com JSTL*/
+			List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela();
+			request.setAttribute("modelLogins", modelLogins);
 			
 			request.setAttribute("msg", msg);
 			//Redirecionando apos salvar novo usuario

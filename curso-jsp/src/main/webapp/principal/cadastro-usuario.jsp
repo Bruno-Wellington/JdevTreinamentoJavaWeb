@@ -92,10 +92,33 @@
 															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-warning" onclick="criarDeleteComAjax()">Excluir com Ajax</button>
 															<button type="button" data-toggle="modal" data-target="#ModalPesquisarUsuario" class="btn waves-effect waves-light hor-grd btn-grd-info">Pesquisar</button>
 														</form>
+														
 														<br> <span id="msg">${msg}</span>
 													</div>
-
 												</div>
+												
+												<!-- Carregando os usuário em tabela com JSTL -->
+												<div style="height: 300px; overflow: scroll;">
+													<table class="table" id="tabelaresultadosview">
+										  				<thead>
+										  					<tr>
+										  						<th scope="col">Id</th>
+										  						<th scope="col">Nome</th>
+										  						<th scope="col">Ver</th>
+										  					</tr>
+										  				</thead>
+										  				<tbody>
+										  					<c:forEach items="${modelLogins}" var="ml">
+										  						<tr>
+										  							<td><c:out value="${ml.id}"></c:out></td>
+										  							<td><c:out value="${ml.nome}"></c:out></td>
+										  							<td><a class="btn waves-effect waves-light hor-grd btn-grd-info" href="<%= request.getContextPath() %>/ServletUsuarioController?acao=buscarEditar&id=${ml.id}">Ver</a></td>
+										  						</tr>
+										  					</c:forEach>		
+										  				</tbody>
+										  			</table>
+												</div>
+												
 											</div>
 										</div>
 										<!-- Page-body end -->
@@ -143,10 +166,10 @@
 	  							
 	  						</tbody>
 	  					</table>
-					</div>
+					</div>			
 					<!-- Mostra o total de usuarios encontrados -->
-	  				<span id="totalResultados"></span>
-				</div>
+	  				<span id="totalResultados"></span>		
+				</div>			
 				<div class="modal-footer">
 					<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-danger" data-dismiss="modal">Fechar</button>	
 				</div>

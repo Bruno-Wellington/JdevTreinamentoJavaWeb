@@ -122,6 +122,30 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	/*Retorna uma lista de usuarios para mostrar na tela. AULA 343 - Carregando os usuário em tabela com JSTL*/
+	public List<ModelLogin> carregarUsuariosTela() throws Exception {
+		
+		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
+		
+		String sql = "SELECT * FROM model_login";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultado = statement.executeQuery();
+		
+		while(resultado.next()) {
+			ModelLogin modelLogin = new ModelLogin();
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setLogin(resultado.getString("login"));
+			//modelLogin.setSenha(resultado.getString("senha"));
+			
+			listaUsuarios.add(modelLogin);
+		}
+		
+		return listaUsuarios;
+		
+	}
+	
 	/*Metodo para validar login*/
 	public boolean validarLogin(String login) throws Exception {
 		
