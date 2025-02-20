@@ -78,3 +78,6 @@ ALTER TABLE IF EXISTS public.model_login
     
 /*INSERT Atualizado*/
 INSERT INTO public.model_login(login, senha, nome, email) VALUES ('admin', 'admin','','');
+
+/*Criando campo para validar se o usuario é admin ou nao*/
+ALTER TABLE model_login ADD COLUMN useradmin boolean NOT NULL DEFAULT false;

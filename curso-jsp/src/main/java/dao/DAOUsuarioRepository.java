@@ -56,7 +56,7 @@ public class DAOUsuarioRepository {
 		ModelLogin modelLogin = new ModelLogin();
 		
 		//Preparando sql
-		String sql = "SELECT * FROM model_login WHERE UPPER(login)= UPPER(?)";
+		String sql = "SELECT * FROM model_login WHERE UPPER(login)= UPPER(?) AND useradmin IS false";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setString(1, login);
 		ResultSet resultado = statement.executeQuery();
@@ -79,7 +79,7 @@ public class DAOUsuarioRepository {
 		ModelLogin modelLogin = new ModelLogin();
 		
 		//Preparando sql
-		String sql = "SELECT * FROM model_login WHERE id= ?";
+		String sql = "SELECT * FROM model_login WHERE id= ? AND useradmin IS false";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setLong(1, Long.parseLong(id));
 		ResultSet resultado = statement.executeQuery();
@@ -101,7 +101,7 @@ public class DAOUsuarioRepository {
 		
 		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
 		
-		String sql = "SELECT * FROM model_login WHERE UPPER(nome) LIKE UPPER(?) ";
+		String sql = "SELECT * FROM model_login WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setString(1, "%" + nome + "%");
 		
@@ -127,7 +127,7 @@ public class DAOUsuarioRepository {
 		
 		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
 		
-		String sql = "SELECT * FROM model_login";
+		String sql = "SELECT * FROM model_login WHERE useradmin is false";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
 		
@@ -165,7 +165,7 @@ public class DAOUsuarioRepository {
 	/*Metodo para deletar um usuario*/
 	public void deletarUser(String idUser) throws Exception {
 		
-		String sql = "DELETE FROM model_login WHERE id= ?";
+		String sql = "DELETE FROM model_login WHERE id= ? AND useradmin IS false";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setLong(1, Long.parseLong(idUser));
 		statement.executeUpdate();
