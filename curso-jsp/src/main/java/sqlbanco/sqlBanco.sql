@@ -81,3 +81,12 @@ INSERT INTO public.model_login(login, senha, nome, email) VALUES ('admin', 'admi
 
 /*Criando campo para validar se o usuario é admin ou nao*/
 ALTER TABLE model_login ADD COLUMN useradmin boolean NOT NULL DEFAULT false;
+
+/*Criando campo FK para separar os dados pelo usuario que fez o cadastro ou alteração*/
+/*Para essa função criamos um campo usuario_id dentro da tabela e referenciamos ele ao id do usuario da propria tabela*/
+ALTER TABLE model_login ADD COLUMN usuario_id bigint NOT NULL DEFAULT 1;
+ALTER TABLE model_login ADD CONSTRAINT usuario_fk FOREIGN KEY (usuario_id) REFERENCES model_login (id);
+UPDATE model_login SET usuario_id = 2 WHERE id > 12;
+
+
+
