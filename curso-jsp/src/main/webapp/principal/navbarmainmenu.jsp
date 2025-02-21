@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+<!-- Nem precisava disso aqui, ele colocou para explicar algo mais nao serviu para nada nessa aula 346 -->
+<c:set scope="session" var="isAdmin" value='<%= request.getSession().getAttribute("isAdmin").toString() %>'></c:set>
 	
 <nav class="pcoded-navbar">
 	<div class="sidebar_toggle">
@@ -57,13 +62,17 @@
 			</a>
 				<ul class="pcoded-submenu">
 				
-					<!-- Redirecionando para a pagina de cadastro de usuarios -->
-					<li class=" "><a href="<%= request.getContextPath() %>/ServletUsuarioController?acao=listarUser"
-						class="waves-effect waves-dark"> <span class="pcoded-micon"><i
-								class="ti-angle-right"></i></span> <span class="pcoded-mtext"
-							data-i18n="nav.basic-components.alert">Usuário</span> <span
-							class="pcoded-mcaret"></span>
-					</a></li>
+					<!-- Esta condição que fizemos com JSP verifica se o usuario é uma admin ou nao, se for true a tela de cadastro de usuarios vai aparecer -->
+					<c:if test="${isAdmin}">
+						<!-- Redirecionando para a pagina de cadastro de usuarios -->
+						<li class=" "><a href="<%= request.getContextPath() %>/ServletUsuarioController?acao=listarUser"
+							class="waves-effect waves-dark"> <span class="pcoded-micon"><i
+									class="ti-angle-right"></i></span> <span class="pcoded-mtext"
+								data-i18n="nav.basic-components.alert">Usuário</span> <span
+								class="pcoded-mcaret"></span>
+						</a></li>
+					</c:if>
+					
 					<li class=" "><a href="breadcrumb.html"
 						class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 								class="ti-angle-right"></i></span> <span class="pcoded-mtext"

@@ -69,6 +69,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setEmail(resultado.getString("email"));
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setSenha(resultado.getString("senha"));
+			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
 		}
 		
 		return modelLogin;
@@ -92,6 +93,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setEmail(resultado.getString("email"));
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setSenha(resultado.getString("senha"));
+			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
 		}
 		
 		return modelLogin;
