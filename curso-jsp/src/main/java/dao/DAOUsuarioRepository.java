@@ -22,7 +22,7 @@ public class DAOUsuarioRepository {
 	public ModelLogin salvarUsuario(ModelLogin modelLogin, Long userLogado) throws Exception {
 		
 		if(modelLogin.isNovo()) { //Verifica se é um novo usuario e grava se for true
-			String sql = "INSERT INTO model_login (login, senha, nome, email, usuario_id) VALUES (?, ?, ?, ?,?)";
+			String sql = "INSERT INTO model_login (login, senha, nome, email, usuario_id, perfil) VALUES (?, ?, ?, ?,?,?)";
 			//Preparando sql
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, modelLogin.getLogin());
@@ -30,17 +30,19 @@ public class DAOUsuarioRepository {
 			statement.setString(3, modelLogin.getNome());
 			statement.setString(4, modelLogin.getEmail());
 			statement.setLong(5, userLogado);
+			statement.setString(6, modelLogin.getPerfil());
 			statement.execute();
 			connection.commit();
 			
 		}else { //Atualizando caso o usuario ja exista
-			String sqlupdate = "UPDATE model_login SET login=?, senha=?, nome=?, email=? WHERE id= "+modelLogin.getId()+";";
+			String sqlupdate = "UPDATE model_login SET login=?, senha=?, nome=?, email=?, perfil=? WHERE id= "+modelLogin.getId()+";";
 			//Preparando sql
 			PreparedStatement statementUpdate = connection.prepareStatement(sqlupdate);
 			statementUpdate.setString(1, modelLogin.getLogin());
 			statementUpdate.setString(2, modelLogin.getSenha());
 			statementUpdate.setString(3, modelLogin.getNome());
 			statementUpdate.setString(4, modelLogin.getEmail());
+			statementUpdate.setString(5, modelLogin.getPerfil());
 			statementUpdate.executeUpdate();//Execute Update
 			connection.commit();
 			
@@ -51,7 +53,7 @@ public class DAOUsuarioRepository {
 		
 	}
 	
-	/*Metodo de consuta de usuario por nome*/
+	/*Metodo de consulta de usuario por nome*/
 	public ModelLogin consultarUsuario(String login) throws Exception {
 		
 		ModelLogin modelLogin = new ModelLogin();
@@ -75,7 +77,7 @@ public class DAOUsuarioRepository {
 		return modelLogin;
 	}
 	
-	/*Metodo de consuta de usuario logado*/
+	/*Metodo de consulta de usuario logado*/
 	public ModelLogin consultarUsuarioLogado(String login) throws Exception {
 		
 		ModelLogin modelLogin = new ModelLogin();
@@ -94,13 +96,14 @@ public class DAOUsuarioRepository {
 			modelLogin.setLogin(resultado.getString("login"));
 			modelLogin.setSenha(resultado.getString("senha"));
 			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
+			modelLogin.setPerfil(resultado.getString("perfil"));
 		}
 		
 		return modelLogin;
 	}
 	
 	
-	/*Metodo de consuta de usuario por nome e por usuario logado*/
+	/*Metodo de consulta de usuario por nome e por usuario logado*/
 	public ModelLogin consultarUsuario(String login, Long userLogado) throws Exception {
 		
 		ModelLogin modelLogin = new ModelLogin();

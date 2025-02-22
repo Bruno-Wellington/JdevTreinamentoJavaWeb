@@ -88,5 +88,8 @@ ALTER TABLE model_login ADD COLUMN usuario_id bigint NOT NULL DEFAULT 1;
 ALTER TABLE model_login ADD CONSTRAINT usuario_fk FOREIGN KEY (usuario_id) REFERENCES model_login (id);
 UPDATE model_login SET usuario_id = 2 WHERE id > 12;
 
-
+/*Criando campo de perfil para os usuarios*/
+ALTER TABLE model_login ADD COLUMN perfil character varying(200);
+update model_login set perfil = 'ADMIN' where id='1';
+update model_login set perfil = 'AUXILIAR' where id='2';
 

@@ -3,8 +3,8 @@
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
-<!-- Nem precisava disso aqui, ele colocou para explicar algo mais nao serviu para nada nessa aula 346 -->
-<c:set scope="session" var="isAdmin" value='<%= request.getSession().getAttribute("isAdmin").toString() %>'></c:set>
+<!-- Setando o tipo do perfil do usuario logado -->
+<c:set scope="session" var="perfil" value='<%= request.getSession().getAttribute("perfil").toString() %>'></c:set>
 	
 <nav class="pcoded-navbar">
 	<div class="sidebar_toggle">
@@ -63,7 +63,7 @@
 				<ul class="pcoded-submenu">
 				
 					<!-- Esta condição que fizemos com JSP verifica se o usuario é uma admin ou nao, se for true a tela de cadastro de usuarios vai aparecer -->
-					<c:if test="${isAdmin}">
+					<c:if test="${perfil == 'ADMIN'}">
 						<!-- Redirecionando para a pagina de cadastro de usuarios -->
 						<li class=" "><a href="<%= request.getContextPath() %>/ServletUsuarioController?acao=listarUser"
 							class="waves-effect waves-dark"> <span class="pcoded-micon"><i

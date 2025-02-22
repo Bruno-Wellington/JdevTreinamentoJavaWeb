@@ -73,6 +73,20 @@
 																<span class="form-bar"></span> 
 																<label class="float-label">E-mail (exemplo@gmail.com)</label>
 															</div>
+															
+															<div class="form-group form-default form-static-label">
+																<span class="form-bar"></span> 
+																<label>Perfil</label>
+															    <select class="form-control" name="perfil">
+															      <option disabled="disabled">Selecione o Perfil</option>
+															      <option value="ADMIN">Admin</option>
+															      <option value="SECRETARIA">Secretaria</option>
+															      <option value="AUXILIAR">Auxiliar</option>
+															    </select>
+															    
+															    
+														  	</div>
+														  	
 															<div class="form-group form-default">
 																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
 																<input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${modelLogin.login}">

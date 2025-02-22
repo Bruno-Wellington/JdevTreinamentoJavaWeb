@@ -120,6 +120,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			String email = request.getParameter("email");
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
+			String perfil = request.getParameter("perfil");
 			
 			ModelLogin modelLogin = new ModelLogin();
 			//Operação ternaria para verificar se o campo id esta preenchido ou diferente de null para converter de String para Long
@@ -129,6 +130,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			modelLogin.setEmail(email);
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
+			modelLogin.setPerfil(perfil);
 			
 			if(daoUsuarioRepository.validarLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
 				msg = "Já existe usuário cadastrado com esse login, informe outro login!";
