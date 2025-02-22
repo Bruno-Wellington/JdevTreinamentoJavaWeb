@@ -107,6 +107,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 		}
 	}
 
+	
 	/*doPost é usado para salvar e atualizar*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
@@ -121,6 +122,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String perfil = request.getParameter("perfil");
+			String sexo = request.getParameter("sexo");
 			
 			ModelLogin modelLogin = new ModelLogin();
 			//Operação ternaria para verificar se o campo id esta preenchido ou diferente de null para converter de String para Long
@@ -131,6 +133,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
 			modelLogin.setPerfil(perfil);
+			modelLogin.setSexo(sexo);
 			
 			if(daoUsuarioRepository.validarLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
 				msg = "Já existe usuário cadastrado com esse login, informe outro login!";

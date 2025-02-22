@@ -84,37 +84,37 @@
 															      
 															      	<!-- Verificando o tipo do perfil para mostrar na tela -->
 															      	<option value="ADMIN" <%
-															      	ModelLogin modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+															      		ModelLogin modelLogin = (ModelLogin) request.getAttribute("modelLogin");
 															      
 															      		if(modelLogin != null && modelLogin.getPerfil().equals("ADMIN")){
 															      			out.print(" ");
 															      				out.print("selected=\"selected\"");
 															      			out.print(" ");
 															      		
-															      		} %>>Admin</option>
+															      		} %> >Admin</option>
 															      	
 															      	<option value="SECRETARIA" <%
-															      	modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+															      		modelLogin = (ModelLogin) request.getAttribute("modelLogin");
 															      
 															      		if(modelLogin != null && modelLogin.getPerfil().equals("SECRETARIA")){
 															      			out.print(" ");
 															      				out.print("selected=\"selected\"");
 															      			out.print(" ");
 															      		
-															      		} %>>Secretaria</option>
+															      		} %> >Secretaria</option>
 															      													      	
 															      	<option value="AUXILIAR" <%
-															      	modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+															      		modelLogin = (ModelLogin) request.getAttribute("modelLogin");
 															      
 															      		if(modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR") ){
 															      			out.print(" ");
 															      				out.print("selected=\"selected\"");
 															      			out.print(" ");
 															      		
-															      		} %>>Auxiliar</option>
+															      		} %> >Auxiliar</option>
 															    </select>
 														  	</div>
-														  	
+														  
 															<div class="form-group form-default">
 																<!-- o Value esta carregando as informações do back end na hora de cadastramos um novo usuario e mantendo na tela -->
 																<input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${modelLogin.login}">
@@ -127,6 +127,31 @@
 																<span class="form-bar"></span> 
 																<label class="float-label">Senha</label>
 															</div>
+															
+															<!-- Verificando o tipo do sexo do usuario para mostrar na tela -->
+															<div class="form-group form-default">
+														  		<label>Sexo</label><br>
+														  		
+														  		<input type="radio" name="sexo" checked="checked" value="MASCULINO" <%
+														  			modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+														  		
+														  			if (modelLogin != null && modelLogin.getSexo().equals("MASCULINO")){
+														  				out.print(" ");
+														  					out.print("checked=\"checked\"");
+														  				out.print(" ");
+														  				
+														  			} %> >Masculino</>
+														  		
+														  		<input type="radio" name="sexo" value="FEMININO" <%
+														  			modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+														  		
+														  			if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")){
+														  				out.print(" ");
+														  					out.print("checked=\"checked\"");
+														  				out.print(" ");
+														  				
+														  			} %> >Feminino</>
+														  	</div>
 
 															<button type="button" class="btn waves-effect waves-light hor-grd btn-grd-primary" onclick="limparForm()">Novo</button>
 															<button class="btn waves-effect waves-light hor-grd btn-grd-success">Salvar</button>

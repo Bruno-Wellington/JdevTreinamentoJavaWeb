@@ -92,4 +92,8 @@ UPDATE model_login SET usuario_id = 2 WHERE id > 12;
 ALTER TABLE model_login ADD COLUMN perfil character varying(200);
 update model_login set perfil = 'ADMIN' where id='1';
 update model_login set perfil = 'AUXILIAR' where id='2';
+update model_login set perfil = 'AUXILIAR' where perfil IS null;
 
+/*Criando campo de sexo para os usuarios*/
+ALTER TABLE model_login ADD COLUMN sexo character varying(200);
+UPDATE model_login SET sexo = 'MASCULINO' WHERE sexo IS null;
