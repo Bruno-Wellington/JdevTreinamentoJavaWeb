@@ -1,3 +1,4 @@
+<%@page import="model.ModelLogin"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -78,13 +79,40 @@
 																<span class="form-bar"></span> 
 																<label>Perfil</label>
 															    <select class="form-control" name="perfil">
-															      <option disabled="disabled">Selecione o Perfil</option>
-															      <option value="ADMIN">Admin</option>
-															      <option value="SECRETARIA">Secretaria</option>
-															      <option value="AUXILIAR">Auxiliar</option>
+															    
+															    	<option disabled="disabled">Selecione o Perfil</option>
+															      
+															      	<!-- Verificando o tipo do perfil para mostrar na tela -->
+															      	<option value="ADMIN" <%
+															      	ModelLogin modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+															      
+															      		if(modelLogin != null && modelLogin.getPerfil().equals("ADMIN")){
+															      			out.print(" ");
+															      				out.print("selected=\"selected\"");
+															      			out.print(" ");
+															      		
+															      		} %>>Admin</option>
+															      	
+															      	<option value="SECRETARIA" <%
+															      	modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+															      
+															      		if(modelLogin != null && modelLogin.getPerfil().equals("SECRETARIA")){
+															      			out.print(" ");
+															      				out.print("selected=\"selected\"");
+															      			out.print(" ");
+															      		
+															      		} %>>Secretaria</option>
+															      													      	
+															      	<option value="AUXILIAR" <%
+															      	modelLogin = (ModelLogin) request.getAttribute("modelLogin");
+															      
+															      		if(modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR") ){
+															      			out.print(" ");
+															      				out.print("selected=\"selected\"");
+															      			out.print(" ");
+															      		
+															      		} %>>Auxiliar</option>
 															    </select>
-															    
-															    
 														  	</div>
 														  	
 															<div class="form-group form-default">
