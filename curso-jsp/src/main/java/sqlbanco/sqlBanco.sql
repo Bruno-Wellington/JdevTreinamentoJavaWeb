@@ -97,3 +97,24 @@ update model_login set perfil = 'AUXILIAR' where perfil IS null;
 /*Criando campo de sexo para os usuarios*/
 ALTER TABLE model_login ADD COLUMN sexo character varying(200);
 UPDATE model_login SET sexo = 'MASCULINO' WHERE sexo IS null;
+
+/*Criando campos de upload de fotos*/
+ALTER TABLE model_login ADD COLUMN fotouser text;
+ALTER TABLE model_login ADD COLUMN extensaofotouser character varying(10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
