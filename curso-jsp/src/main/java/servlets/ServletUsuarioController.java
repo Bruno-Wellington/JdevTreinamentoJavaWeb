@@ -146,7 +146,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 	            Part part = request.getPart("fileFoto");
 	            
 	            // Verifica se o arquivo foi enviado
-	            if (part != null) {
+	            if (part.getSize() > 0) {
 	                // Converte o arquivo para um array de bytes
 	                byte[] foto = convertPartToByteArray(part);
 	                

@@ -68,7 +68,15 @@
 															<!-- Campo de imagen -->
 															<div class="form-group form-default input-group-mb-4">
 																<div class="input-group-prepend">
-																	<img alt="Imagem User" id="fotobase64" width="70px" src="">
+																	<!-- Condição para mostrar a foto -->
+																	<c:if test="${modelLogin.fotouser != '' && modelLogin.fotouser != null}">
+																		<img alt="Imagem User" id="fotobase64" width="70px" src="${modelLogin.fotouser}">
+																	</c:if>
+																	
+																	<!-- Condição para mostrar a foto padrão caso seja um novo usuario -->
+																	<c:if test="${modelLogin.fotouser == '' || modelLogin.fotouser == null}">
+																		<img alt="Imagem User" id="fotobase64" width="70px" src="assets/images/user.png">
+																	</c:if>
 																</div>
 																<!--  accept="image/*" indica que o campo so vai aceitar imagens e o * signigica que de qualquer tipo -->
 																<input type="file" id="fileFoto" name="fileFoto" accept="image/*" onchange="visualizarImg('fotobase64','fileFoto')" class="form-control-file" style="margin-top: 15px; margin-left: 5px;">
