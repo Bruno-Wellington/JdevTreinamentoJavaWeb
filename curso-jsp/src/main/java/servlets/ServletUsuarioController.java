@@ -6,9 +6,12 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import model.ModelLogin;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -126,6 +129,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			String sexo = request.getParameter("sexo");
 			
 			ModelLogin modelLogin = new ModelLogin();
+			
 			//Operação ternaria para verificar se o campo id esta preenchido ou diferente de null para converter de String para Long
 			//O campo id nunca será preenchido entao sempre vem para o back end como null e o banco de dados quem seta o valor
 			modelLogin.setId(id != null && !id.isEmpty() ? Long.parseLong(id) : null);
@@ -135,6 +139,30 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			modelLogin.setSenha(senha);
 			modelLogin.setPerfil(perfil);
 			modelLogin.setSexo(sexo);
+			
+			//Verificação da imagem
+			if (request.getContentType() != null && request.getContentType().startsWith("multipart/form-data")) {
+	            // Obtém o arquivo enviado
+	            Part part = request.getPart("fileFoto");
+	            
+	            // Verifica se o arquivo foi enviado
+	            if (part != null) {
+	                // Converte o arquivo para um array de bytes
+	                byte[] foto = convertPartToByteArray(part);
+	                
+	                // Converte o array de bytes para uma string Base64
+	                String imagemBase64 = "data:" + part.getContentType().split("/")[1] + ";base64," + Base64.getEncoder().encodeToString(foto);
+	                System.out.println(imagemBase64);
+	                
+	                // Agora você pode definir os dados no seu modelo
+	                modelLogin.setFotouser(imagemBase64);
+	                modelLogin.setExtensaofotouser(part.getContentType().split("/")[1]);
+	                
+	                
+	            }
+	        }
+	        
+			
 			
 			if(daoUsuarioRepository.validarLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
 				msg = "Já existe usuário cadastrado com esse login, informe outro login!";
@@ -176,5 +204,14 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			redirecionar.forward(request, response);
 		}
 	}
+	
+	//Função para converter imagem para um array de bytes
+    private byte[] convertPartToByteArray(Part part) throws IOException {
+        // Obtém o InputStream do arquivo enviado
+        try (InputStream inputStream = part.getInputStream()) {
+            // Converte o InputStream para um array de bytes
+            return inputStream.readAllBytes(); // A partir do Java 9, você pode usar esse método direto
+        }
+    }
 
 }
