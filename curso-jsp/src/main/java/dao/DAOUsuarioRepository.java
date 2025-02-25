@@ -127,41 +127,6 @@ public class DAOUsuarioRepository {
 	}
 	
 	
-	/*Metodo de consulta de usuario logado*/
-	public ModelLogin consultarUsuarioLogado(String login) throws Exception {
-		
-		ModelLogin modelLogin = new ModelLogin();
-		
-		//Preparando sql
-		String sql = "SELECT * FROM model_login WHERE UPPER(login)= UPPER(?)";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setString(1, login);
-		ResultSet resultado = statement.executeQuery();
-		
-		//Enquando tiver resultado
-		while(resultado.next()) {
-			modelLogin.setId(resultado.getLong("id"));
-			modelLogin.setNome(resultado.getString("nome"));
-			modelLogin.setEmail(resultado.getString("email"));
-			modelLogin.setLogin(resultado.getString("login"));
-			modelLogin.setSenha(resultado.getString("senha"));
-			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
-			modelLogin.setPerfil(resultado.getString("perfil"));
-			modelLogin.setSexo(resultado.getString("sexo"));
-			modelLogin.setFotouser(resultado.getString("fotouser"));
-			
-			modelLogin.setCep(resultado.getString("cep"));
-			modelLogin.setLogradouro(resultado.getString("logradouro"));
-			modelLogin.setBairro(resultado.getString("bairro"));
-			modelLogin.setLocalidade(resultado.getString("localidade"));
-			modelLogin.setUf(resultado.getString("uf"));
-			modelLogin.setNumero(resultado.getString("numero"));
-			
-		}
-		
-		return modelLogin;
-	}
-	
 	
 	/*Metodo de consulta de usuario por nome e por usuario logado*/
 	public ModelLogin consultarUsuario(String login, Long userLogado) throws Exception {
@@ -195,6 +160,8 @@ public class DAOUsuarioRepository {
 		
 		return modelLogin;
 	}
+	
+	
 	
 	/*Metodo de consuta de usuario por ID*/
 	public ModelLogin consultarUsuarioId(String id, Long userLogado) throws Exception {
@@ -231,12 +198,51 @@ public class DAOUsuarioRepository {
 		return modelLogin;
 	}
 	
+	
+	
+	/*Metodo de consulta de usuario logado*/
+	public ModelLogin consultarUsuarioLogado(String login) throws Exception {
+		
+		ModelLogin modelLogin = new ModelLogin();
+		
+		//Preparando sql
+		String sql = "SELECT * FROM model_login WHERE UPPER(login)= UPPER(?)";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, login);
+		ResultSet resultado = statement.executeQuery();
+		
+		//Enquando tiver resultado
+		while(resultado.next()) {
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setLogin(resultado.getString("login"));
+			modelLogin.setSenha(resultado.getString("senha"));
+			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
+			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
+			modelLogin.setFotouser(resultado.getString("fotouser"));
+			
+			modelLogin.setCep(resultado.getString("cep"));
+			modelLogin.setLogradouro(resultado.getString("logradouro"));
+			modelLogin.setBairro(resultado.getString("bairro"));
+			modelLogin.setLocalidade(resultado.getString("localidade"));
+			modelLogin.setUf(resultado.getString("uf"));
+			modelLogin.setNumero(resultado.getString("numero"));
+			
+		}
+		
+		return modelLogin;
+	}
+	
+	
+	
 	/*Retorna uma lista de usuarios*/
 	public List<ModelLogin> consultaUsuarioList(String nome, Long userLogado) throws Exception {
 		
 		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
 		
-		String sql = "SELECT * FROM model_login WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false AND usuario_id = ?";
+		String sql = "SELECT * FROM model_login WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false AND usuario_id = ? LIMIT 5";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setString(1, "%" + nome + "%");
 		statement.setLong(2, userLogado);
@@ -260,12 +266,13 @@ public class DAOUsuarioRepository {
 		
 	}
 	
-	/*Retorna uma lista de usuarios para mostrar na tela. AULA 343 - Carregando os usuário em tabela com JSTL*/
-	public List<ModelLogin> carregarUsuariosTela(Long userLogado) throws Exception {
+	
+	
+	public List<ModelLogin> carregarUsuariosTelaPaginada(Long userLogado, Integer offset) throws Exception {
 		
 		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
 		
-		String sql = "SELECT * FROM model_login WHERE useradmin IS false AND usuario_id = " + userLogado;
+		String sql = "SELECT * FROM model_login WHERE useradmin IS false AND usuario_id = " + userLogado + " ORDER BY id OFFSET " + offset +" LIMIT 5";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
 		
@@ -286,6 +293,36 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	
+	
+	/*Retorna uma lista de usuarios para mostrar na tela. AULA 343 - Carregando os usuário em tabela com JSTL*/
+	public List<ModelLogin> carregarUsuariosTela(Long userLogado) throws Exception {
+		
+		List<ModelLogin> listaUsuarios = new ArrayList<ModelLogin>();
+		
+		String sql = "SELECT * FROM model_login WHERE useradmin IS false AND usuario_id = " + userLogado + " LIMIT 5";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultado = statement.executeQuery();
+		
+		while(resultado.next()) {
+			ModelLogin modelLogin = new ModelLogin();
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setLogin(resultado.getString("login"));
+			//modelLogin.setSenha(resultado.getString("senha"));
+			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
+			
+			listaUsuarios.add(modelLogin);
+		}
+		
+		return listaUsuarios;
+		
+	}
+	
+	
+	
 	/*Metodo para validar login*/
 	public boolean validarLogin(String login) throws Exception {
 		
@@ -302,6 +339,8 @@ public class DAOUsuarioRepository {
 	
 	}
 	
+	
+	
 	/*Metodo para deletar um usuario*/
 	public void deletarUser(String idUser) throws Exception {
 		
@@ -312,4 +351,42 @@ public class DAOUsuarioRepository {
 		connection.commit();
 		
 	}
+	
+	
+	
+	/*Metodo para calcular o total de paginação*/
+	public int totalPagina (Long userLogado) throws Exception {
+		
+		// Cria a string SQL que conta o número total de registros (cadastros) para o usuário especificado.
+		String sql = "SELECT count(1) as total FROM model_login WHERE usuario_id= " + userLogado;
+		
+		// Prepara a consulta SQL para ser executada no banco de dados usando 'connection'.
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+		// Executa a consulta SQL e armazena o resultado na variável 'resultado' (ResultSet).
+		ResultSet resultado = statement.executeQuery();
+		
+		resultado.next();
+		
+		// Extrai o valor da coluna 'total' do ResultSet, que contém o número total de cadastros para o usuário.
+		Double totalCadastros = resultado.getDouble("total");
+		
+		// Define a quantidade de registros a serem exibidos por página (neste caso, 5 registros por página).
+		Double porPagina = 5.0;
+		
+		// Calcula o número de páginas dividindo o total de cadastros pela quantidade de registros por página.
+		Double pagina = totalCadastros / porPagina;
+		
+	    // Calcula o resto da divisão do número de páginas por 2, verificando se é necessário arredondar para o próximo inteiro.
+		Double resto = pagina % 2;
+		
+		// Se houver um valor fracionado (resto maior que 0), incrementa uma página extra.
+		if (resto > 0) {
+			pagina++; // Adiciona 1 à variável 'pagina' para arredondar o número de páginas para cima.
+		}
+		
+		// Retorna o número de páginas como um valor inteiro.
+		return pagina.intValue(); // Converte 'pagina' para inteiro e retorna.
+	}
+	
 }

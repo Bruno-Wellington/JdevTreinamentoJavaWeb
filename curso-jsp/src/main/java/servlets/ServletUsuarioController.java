@@ -46,7 +46,9 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela(super.getUserLogado(request));
 				request.setAttribute("modelLogins", modelLogins);
 				
-				request.setAttribute("msg", "Excluido com sucesso!");	
+				request.setAttribute("msg", "Excluido com sucesso!");
+				//Lista paginada
+				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
 				//Redirecionando apos excluir o usuario
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 						
@@ -81,6 +83,8 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("msg", "Usuário em edição");
 				//Redirecionando
 				request.setAttribute("modelLogin", modelLogin);
+				//Lista paginada
+				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 				
 			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarUser")) {
@@ -90,6 +94,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("msg", "Usuários carregados!");
 				/*Carregando usuarios na tela com JSTL*/
 				request.setAttribute("modelLogins", modelLogins);
+				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
 				request.getRequestDispatcher("/principal/cadastro-usuario.jsp").forward(request, response);
 				
 			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("downloadFoto")) {
@@ -117,12 +122,25 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				
 				
 				
+			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("paginar")) {
+				
+				Integer offset = Integer.parseInt(request.getParameter("pagina"));
+				
+				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTelaPaginada(this.getUserLogado(request), offset);
+				
+				request.setAttribute("modelLogins", modelLogins);
+				//Lista paginada
+				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
+				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
+				
+				
 			} else {
 				
 				/*Carregando usuarios na tela com JSTL*/
 				List<ModelLogin> modelLogins = daoUsuarioRepository.carregarUsuariosTela(super.getUserLogado(request));
 				request.setAttribute("modelLogins", modelLogins);
-				
+				//Lista paginada
+				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
 				request.getRequestDispatcher("principal/cadastro-usuario.jsp").forward(request, response);
 				
 			}
@@ -229,6 +247,8 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			request.setAttribute("modelLogins", modelLogins);
 			
 			request.setAttribute("msg", msg);
+			//Lista paginada
+			request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(this.getUserLogado(request)));
 			//Redirecionando apos salvar novo usuario
 			RequestDispatcher redireciona = request.getRequestDispatcher("principal/cadastro-usuario.jsp");
 			//Atributo para mostrar os dados na tela apos salvar
