@@ -102,6 +102,14 @@ UPDATE model_login SET sexo = 'MASCULINO' WHERE sexo IS null;
 ALTER TABLE model_login ADD COLUMN fotouser text;
 ALTER TABLE model_login ADD COLUMN extensaofotouser character varying(10);
 
+/*Criando campos de endereço*/
+ALTER TABLE model_login ADD COLUMN cep character varying(250);
+ALTER TABLE model_login ADD COLUMN logradouro character varying(250);
+ALTER TABLE model_login ADD COLUMN bairro character varying(250);
+ALTER TABLE model_login ADD COLUMN localidade character varying(250);
+ALTER TABLE model_login ADD COLUMN uf character varying(250);
+ALTER TABLE model_login ADD COLUMN numero character varying(250);
+
 
 
 

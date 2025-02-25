@@ -137,6 +137,9 @@ public class ServletUsuarioController extends ServletGenericUtil {
 	}
 
 	
+	
+	
+	
 	/*doPost é usado para salvar e atualizar*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
@@ -152,6 +155,12 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			String senha = request.getParameter("senha");
 			String perfil = request.getParameter("perfil");
 			String sexo = request.getParameter("sexo");
+			String cep = request.getParameter("cep");
+			String logradouro = request.getParameter("logradouro");
+			String bairro = request.getParameter("bairro");
+			String localidade = request.getParameter("localidade");
+			String uf = request.getParameter("uf");
+			String numero = request.getParameter("numero");
 			
 			ModelLogin modelLogin = new ModelLogin();
 			
@@ -164,6 +173,13 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			modelLogin.setSenha(senha);
 			modelLogin.setPerfil(perfil);
 			modelLogin.setSexo(sexo);
+			modelLogin.setCep(cep);
+			modelLogin.setLogradouro(logradouro);
+			modelLogin.setBairro(bairro);
+			modelLogin.setLocalidade(localidade);
+			modelLogin.setUf(uf);
+			modelLogin.setNumero(numero);
+			
 			
 			//UPLOAD DE FOTO
 			// Verifica se o tipo de conteúdo da requisição é multipart/form-data, o que indica que o usuário está enviando um 

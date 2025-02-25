@@ -97,6 +97,43 @@
 																<label class="float-label">E-mail (exemplo@gmail.com)</label>
 															</div>
 															
+															<div class="form-group form-default">
+																<!-- onblur="pesquisaCep()" vai criar a função de ao digitar o cep e precionar tab será consultado automaticamente -->
+																<input onblur="pesquisaCep();" type="text" name="cep" id="cep" class="form-control" required="required" autocomplete="off" value="${modelLogin.cep}">
+																<span class="form-bar"></span> 
+																<label class="float-label">Cep</label>
+															</div>
+															
+															<div class="form-group form-default">
+																<input type="text" name="logradouro" id="logradouro" class="form-control" required="required" autocomplete="off" value="${modelLogin.logradouro}">
+																<span class="form-bar"></span> 
+																<label class="float-label">Logradouro</label>
+															</div>
+															
+															<div class="form-group form-default">
+																<input type="text" name="bairro" id="bairro" class="form-control" required="required" autocomplete="off" value="${modelLogin.bairro}">
+																<span class="form-bar"></span> 
+																<label class="float-label">Bairro</label>
+															</div>
+															
+															<div class="form-group form-default">
+																<input type="text" name="localidade" id="localidade" class="form-control" required="required" autocomplete="off" value="${modelLogin.localidade}">
+																<span class="form-bar"></span> 
+																<label class="float-label">Cidade</label>
+															</div>
+															
+															<div class="form-group form-default">
+																<input type="text" name="uf" id="uf" class="form-control" required="required" autocomplete="off" value="${modelLogin.uf}">
+																<span class="form-bar"></span> 
+																<label class="float-label">Estado</label>
+															</div>
+															
+															<div class="form-group form-default">
+																<input type="text" name="numero" id="numero" class="form-control" required="required" autocomplete="off" value="${modelLogin.numero}">
+																<span class="form-bar"></span> 
+																<label class="float-label">Numero</label>
+															</div>
+															
 															<div class="form-group form-default form-static-label">
 																<span class="form-bar"></span> 
 																<label>Perfil</label>
@@ -272,7 +309,24 @@
 	<!-- Funções JavaScript -->
 	<script type="text/javascript">
 	
+		/*Função javascript para pesquisar Cep*/
+		function pesquisaCep() {
+			var cep = $("#cep").val();
+			
+			$.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+				if(!("erro" in dados)) {
+					//Atualiza os campos com os valores da consulta.
+					$("#cep").val(dados.cep);
+                    $("#logradouro").val(dados.logradouro);
+                    $("#bairro").val(dados.bairro);
+                    $("#localidade").val(dados.localidade);
+                    $("#uf").val(dados.uf);
+                    
+				} 
+			});
+		}
 	
+		
 		/*Função javascript para mostrar a foto selecionada na tela*/
 		function visualizarImg(fotoembase64, filefoto) {
 			
