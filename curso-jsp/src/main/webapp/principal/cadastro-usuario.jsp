@@ -70,7 +70,9 @@
 																<div class="input-group-prepend">
 																	<!-- Condição para mostrar a foto -->
 																	<c:if test="${modelLogin.fotouser != '' && modelLogin.fotouser != null}">
-																		<img alt="Imagem User" id="fotobase64" width="70px" src="${modelLogin.fotouser}">
+																		<a href="<%= request.getContextPath()%>/ServletUsuarioController?acao=downloadFoto&id=${modelLogin.id}">
+																			<img alt="Imagem User" id="fotobase64" width="70px" src="${modelLogin.fotouser}">
+																		</a>
 																	</c:if>
 																	
 																	<!-- Condição para mostrar a foto padrão caso seja um novo usuario -->

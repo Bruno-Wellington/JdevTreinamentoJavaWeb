@@ -92,6 +92,31 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("modelLogins", modelLogins);
 				request.getRequestDispatcher("/principal/cadastro-usuario.jsp").forward(request, response);
 				
+			} else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("downloadFoto")) {
+				
+				String idUser = request.getParameter("id");
+				
+				ModelLogin modelLogin = daoUsuarioRepository.consultarUsuarioId(idUser, super.getUserLogado(request));
+				
+				// Verifica se a foto do usuário não é nula e não está vazia
+				if(modelLogin.getFotouser() != null && !modelLogin.getFotouser().isEmpty()) {
+					
+					// Define o cabeçalho "Content-Disposition" para indicar ao navegador que o arquivo será baixado,
+				    // e também define o nome do arquivo a ser baixado. O nome do arquivo é gerado com a extensão
+				    // da foto do usuário.
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo." + modelLogin.getExtensaofotouser());
+					
+					// Decodifica a string Base64 (que representa a imagem) e escreve o conteúdo decodificado no fluxo de saída
+				    // O método split("\\,")[1] é usado para separar a parte do conteúdo Base64 após o caractere "," 
+				    // (que geralmente é encontrado em dados do tipo data URL, como "data:image/png;base64,").
+				    // O Base64.getDecoder().decode(...) decodifica a string para um array de bytes que representa a imagem.
+					response.getOutputStream().write(Base64.getDecoder().decode(modelLogin.getFotouser().split("\\,")[1]));
+					
+					
+				}
+				
+				
+				
 			} else {
 				
 				/*Carregando usuarios na tela com JSTL*/
@@ -140,25 +165,28 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			modelLogin.setPerfil(perfil);
 			modelLogin.setSexo(sexo);
 			
-			//Verificação da imagem
+			//UPLOAD DE FOTO
+			// Verifica se o tipo de conteúdo da requisição é multipart/form-data, o que indica que o usuário está enviando um 
 			if (request.getContentType() != null && request.getContentType().startsWith("multipart/form-data")) {
-	            // Obtém o arquivo enviado
+	           
+				// Obtém o arquivo enviado no formulário, com o nome do campo "fileFoto"
 	            Part part = request.getPart("fileFoto");
 	            
-	            // Verifica se o arquivo foi enviado
+	            // Verifica se o arquivo enviado tem algum conteúdo (se o tamanho é maior que zero)
 	            if (part.getSize() > 0) {
-	                // Converte o arquivo para um array de bytes
+	            	
+	            	// Converte o arquivo para um array de bytes utilizando um método auxiliar
 	                byte[] foto = convertPartToByteArray(part);
 	                
-	                // Converte o array de bytes para uma string Base64
+	                // Converte o array de bytes em uma string Base64, incluindo o prefixo "data:image/{extensão};base64," 
+	                // para que a imagem possa ser interpretada corretamente quando for exibida ou enviada.
 	                String imagemBase64 = "data:" + part.getContentType().split("/")[1] + ";base64," + Base64.getEncoder().encodeToString(foto);
-	                System.out.println(imagemBase64);
-	                
-	                // Agora você pode definir os dados no seu modelo
+	              
+	                // Define a string Base64 no modelo de dados, para armazenar a imagem em formato Base64
 	                modelLogin.setFotouser(imagemBase64);
+	                // Define a extensão do arquivo (como "jpg", "png", etc.) no modelo de dados
 	                modelLogin.setExtensaofotouser(part.getContentType().split("/")[1]);
-	                
-	                
+	               
 	            }
 	        }
 	        
@@ -205,12 +233,15 @@ public class ServletUsuarioController extends ServletGenericUtil {
 		}
 	}
 	
-	//Função para converter imagem para um array de bytes
+	// Método que converte o conteúdo de uma parte do formulário (Part) em um array de bytes.
     private byte[] convertPartToByteArray(Part part) throws IOException {
-        // Obtém o InputStream do arquivo enviado
+    	
+    	// Usa o try-with-resources para garantir que o InputStream será fechado automaticamente
         try (InputStream inputStream = part.getInputStream()) {
-            // Converte o InputStream para um array de bytes
-            return inputStream.readAllBytes(); // A partir do Java 9, você pode usar esse método direto
+        	
+        	// Lê todo o conteúdo do InputStream e retorna como um array de bytes.
+            // O método readAllBytes() foi introduzido no Java 9, facilitando a leitura completa do conteúdo.
+            return inputStream.readAllBytes();
         }
     }
 
