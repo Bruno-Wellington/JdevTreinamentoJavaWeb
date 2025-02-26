@@ -54,7 +54,7 @@
 				</a>
 					<ul class="show-notification">
 						<li>
-							<h6>Notifications</h6> <label class="label label-danger">New</label>
+							<h6>Novidades</h6> <label class="label label-danger">Novo</label>
 						</li>
 						<li class="waves-effect waves-light">
 							<div class="media">
@@ -109,7 +109,7 @@
 						class="ti-angle-down"></i>
 				</a>
 					<ul class="show-notification profile-notification">
-						<li class="waves-effect waves-light"><a href="#!"> <i
+						<!-- <li class="waves-effect waves-light"><a href="#!"> <i
 								class="ti-settings"></i> Settings
 						</a></li>
 						<li class="waves-effect waves-light"><a
@@ -121,11 +121,11 @@
 						<li class="waves-effect waves-light"><a
 							href="auth-lock-screen.html"> <i class="ti-lock"></i> Lock
 								Screen
-						</a></li>
+						</a></li> -->
 						<!-- Ação de logout feita no ServletLogin do back-end -->
 						<li class="waves-effect waves-light"><a
 							href="<%= request.getContextPath() %>/ServletLogin?acao=logout"> <i
-								class="ti-layout-sidebar-left"></i> Logout
+								class="ti-layout-sidebar-left"></i> Sair
 						</a></li>
 					</ul></li>
 			</ul>

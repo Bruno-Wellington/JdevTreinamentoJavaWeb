@@ -38,7 +38,7 @@
 									<div class="page-body">
 										<div class="row">
 
-											<h1>Conteudo do projeto</h1>
+											<h3> Tela Principal do Projeto</h3>
 
 										</div>
 									</div>
