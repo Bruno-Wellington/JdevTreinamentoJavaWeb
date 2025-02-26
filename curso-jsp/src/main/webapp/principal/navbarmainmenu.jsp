@@ -13,8 +13,16 @@
 	<div class="pcoded-inner-navbar main-menu">
 		<div class="">
 			<div class="main-menu-header">
-				<img class="img-80 img-radius" src="<%= request.getContextPath() %>/assets/images/avatar-4.jpg"
-					alt="User-Profile-Image">
+				<!-- Adicionando foto no icone do usuario logado -->
+				<c:if test="${fotoUser != '' && fotoUser != null}">
+					<img class="img-80 img-radius" src="${fotoUser}" alt="User-Profile-Image">
+				</c:if>
+				
+				<!-- Adicionando foto qualquer no icone do usuario logado que nao foto -->
+				<c:if test="${fotoUser == '' || fotoUser == null}">
+					<img class="img-80 img-radius" src="assets/images/user.png" alt="User-Profile-Image">
+				</c:if>
+						
 				<div class="user-details">
 					<!-- Capturando do back-end o usuario logado, o sinal de = é para que seja impresso a informação na tela -->
 					<!-- Segunda forma de capturar essa informação -->

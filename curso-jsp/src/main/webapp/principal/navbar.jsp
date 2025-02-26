@@ -51,7 +51,7 @@
 				<li class="header-notification"><a href="#!"
 					class="waves-effect waves-light"> <i class="ti-bell"></i> <span
 						class="badge bg-c-red"></span>
-				</a>
+					</a>
 					<ul class="show-notification">
 						<li>
 							<h6>Novidades</h6> <label class="label label-danger">Novo</label>
@@ -98,11 +98,11 @@
 								</div>
 							</div>
 						</li>
-					</ul></li>
-				<li class="user-profile header-notification"><a href="#!"
-					class="waves-effect waves-light"> <img
-						src="<%= request.getContextPath() %>/assets/images/avatar-4.jpg" class="img-radius"
-						alt="User-Profile-Image"> 
+					</ul>
+				</li>
+				<li class="user-profile header-notification">
+					<a href="#!" class="waves-effect waves-light"> 
+						<!-- <img src="<%= request.getContextPath() %>/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> --> 
 						<!-- Capturando do back-end o usuario logado, o sinal de = é para que seja impresso a informação na tela -->
 						<!-- Segunda forma de capturar essa informação -->
 						<span><%= session.getAttribute("usuario") %></span> <i
